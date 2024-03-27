@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #d6f5ff;
+  background-color: #323330;
 }
 
 code {
@@ -29,7 +29,7 @@ code {
 
 .header h1 {
   /* Non-accessible color */
-  color: #61dbfb;
+  color: #f0db4f;
   /* color: #af8602; */
 
   text-transform: uppercase;
@@ -48,7 +48,7 @@ code {
   content: "";
   height: 3px;
   width: 4rem;
-  background-color: #61dbfb;
+  background-color: #f0db4f;
   position: absolute;
   top: calc(50% - 1px);
 }
@@ -63,7 +63,7 @@ code {
 
 .footer {
   font-size: 1.4rem;
-  color: #61dbfb;
+  color: #f0db4f;
 }
 
 .btn {
