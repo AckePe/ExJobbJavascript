@@ -22,11 +22,10 @@
         <input
           type="text"
           placeholder="Search..."
-          id="searchTerm"
-          class="hidden"
+          id="searchInput"
         />
         <!-- Add the "hidden" class to input -->
-        <button class="navbar-btn hidden" onclick="handleSingleSearchClick()">
+        <button class="navbar-btn hidden" onclick="singleSearch()">
           Search
         </button>
         <!-- Add the "hidden" class to button -->
@@ -53,9 +52,31 @@
     <!-- Ensure main.js is loaded before any usage -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var toggleButton = document.getElementById("toggleButton");
-        toggleButton.addEventListener("click", toggleContent);
-      });
+    var toggleButton = document.getElementById("toggleButton");
+    toggleButton.addEventListener("click", toggleContent);
+
+    fetch('./dataSet.json')
+    .then(response => {
+        console.log('Fetch response:', response);
+        return response.text(); // Parse response body as text
+    })
+    .then(data => {
+        console.log('Response body:', data); // Log response body
+        // Parse JSON data from response body
+        const jsonData = JSON.parse(data);
+        console.log('Parsed JSON data:', jsonData); // Log parsed JSON data
+
+        // Slice the data to contain only the first 100 entries
+        const slicedData = jsonData.slice(0, 100);
+        
+        // Store the sliced data globally
+        window.data = slicedData;
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+});
+
 
       function toggleContent() {
         var searchContent = document.getElementById("searchContent");
@@ -67,6 +88,48 @@
           searchContent.style.display = "none"; // Corrected assignment
           toggleButton.textContent = "Search"; // Change button text
         }
+      }
+
+      function search() {
+        // Get search query
+        var query = document.getElementById("searchInput").value.toLowerCase();
+
+        // Get reference to search results div
+        var searchResultsDiv = document.getElementById("searchResults");
+        searchResultsDiv.innerHTML = "";
+
+        // Filter data based on search query
+        var filteredData = window.data.filter(function(item) {
+            // Check if any field matches the search query
+            for (var key in item) {
+                if (item.hasOwnProperty(key) && typeof item[key] === "string" && item[key].toLowerCase().includes(query)) {
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        // Render search results
+        filteredData.forEach(function(dataset) {
+            var li = document.createElement("li");
+            li.className = "card";
+
+            var header = document.createElement("div");
+            header.className = "card-header";
+            header.innerHTML = "<h3>Stock code: " + dataset.stockcode + "</h3>";
+
+            var content = document.createElement("div");
+            content.className = "card-content";
+            content.innerHTML = "<p><strong>Description: " + dataset.description + "</strong></p>" +
+                                "<p><strong>Quantity: " + dataset.quantity + "</strong></p>" +
+                                "<p><strong>Price: " + dataset.price + "</strong></p>" +
+                                "<p><strong>Invoice date: " + dataset.invoiceDate + "</strong></p>" +
+                                "<p><strong>Country: " + dataset.country + "</strong></p>";
+
+            li.appendChild(header);
+            li.appendChild(content);
+            searchResultsDiv.appendChild(li);
+        });
       }
     </script>
   </body>
