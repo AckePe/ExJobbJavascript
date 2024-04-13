@@ -15,12 +15,59 @@
         <img src="js-logo.png" alt="Logo" />
       </div>
       <div>
-        <button class="btn" onclick="toggleContent()">Search</button>
+        <button class="btn" id="toggleButton">Search</button>
       </div>
-      <div id="searchContent"></div>
+      <nav class="navbar" id="searchContent" style="display: none">
+        <!-- Add the "hidden" class here -->
+        <input
+          type="text"
+          placeholder="Search..."
+          id="searchTerm"
+          class="hidden"
+        />
+        <!-- Add the "hidden" class to input -->
+        <button class="navbar-btn hidden" onclick="handleSingleSearchClick()">
+          Search
+        </button>
+        <!-- Add the "hidden" class to button -->
+        <button class="navbar-btn hidden" onclick="handleSearchButtonClick()">
+          Measure
+        </button>
+        <!-- Add the "hidden" class to button -->
+      </nav>
       <footer class="footer">
-        <p>This is a sample text</p>
+        <p>
+          <a href="https://creativecommons.org/licenses/by/4.0/" style="color: #f0db4f;">
+            Attribution 4.0 International (CC BY 4.0)
+          </a>
+          <p>
+            Dataset created by 
+            <a href="https://www.kaggle.com/datasets/whenamancodes/online-retail-data-ii" style="color: #f0db4f;">
+              Aman Chauhan
+            </a>
+          </p>
+        </p>
       </footer>
     </div>
+
+    <!-- Ensure main.js is loaded before any usage -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var toggleButton = document.getElementById("toggleButton");
+        toggleButton.addEventListener("click", toggleContent);
+      });
+
+      function toggleContent() {
+        var searchContent = document.getElementById("searchContent");
+        var toggleButton = document.getElementById("toggleButton");
+        if (searchContent.style.display === "none") {
+          searchContent.style.display = "flex";
+          toggleButton.textContent = "Home"; // Change button text
+        } else {
+          searchContent.style.display = "none"; // Corrected assignment
+          toggleButton.textContent = "Search"; // Change button text
+        }
+      }
+    </script>
   </body>
 </html>
