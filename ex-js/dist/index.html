@@ -21,7 +21,7 @@
         <!-- Add the "hidden" class here -->
         <input type="text" placeholder="Search..." id="searchInput">
         <!-- Add the "hidden" class to input -->
-        <button class="navbar-btn hidden" onclick="singleSearch()">
+        <button class="navbar-btn hidden" onclick="search()">
           Search
         </button>
         <!-- Add the "hidden" class to button -->
@@ -49,20 +49,28 @@
     <script>document.addEventListener("DOMContentLoaded", function () {
   var toggleButton = document.getElementById("toggleButton");
   toggleButton.addEventListener("click", toggleContent);
-  fetch('./dataSet.json').then(function (response) {
+
+  // Add event listener to the search button
+  var searchButton = document.querySelector("#searchContent button");
+  searchButton.addEventListener("click", function () {
+    // Display search content if hidden
+    var searchContent = document.getElementById("searchContent");
+    if (searchContent.style.display === "none") {
+      searchContent.style.display = "flex";
+      toggleButton.textContent = "Home"; // Change button text
+    }
+
+    // Run the search function
+    search();
+  });
+  fetch('http://localhost:3000/dataSet.json').then(function (response) {
     console.log('Fetch response:', response);
-    return response.text(); // Parse response body as text
+    return response.json(); // Parse response body as JSON
   }).then(function (data) {
-    console.log('Response body:', data); // Log response body
-    // Parse JSON data from response body
-    var jsonData = JSON.parse(data);
-    console.log('Parsed JSON data:', jsonData); // Log parsed JSON data
+    console.log('Parsed JSON data:', data); // Log parsed JSON data
 
-    // Slice the data to contain only the first 100 entries
-    var slicedData = jsonData.slice(0, 100);
-
-    // Store the sliced data globally
-    window.data = slicedData;
+    // Store the data globally
+    window.data = data;
   }).catch(function (error) {
     console.error('Error fetching data:', error);
   });
