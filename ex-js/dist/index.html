@@ -29,8 +29,8 @@
           Measure
         </button>
         <!-- Add the "hidden" class to button -->
-        <div id="searchResults"></div>
       </nav>
+      <ul class="samples" id="searchResultsContainer"></ul>
       <footer class="footer">
         <p>
           <a href="https://creativecommons.org/licenses/by/4.0/" style="color: #f0db4f;">
@@ -88,12 +88,12 @@ function toggleContent() {
   }
 }
 function search() {
-  // Get search query
-  var query = document.getElementById("searchInput").value.toLowerCase();
+  // Get search query from input field
+  var query = document.getElementById("searchInput").value.toLowerCase().trim();
 
-  // Get reference to search results div
-  var searchResultsDiv = document.getElementById("searchResults");
-  searchResultsDiv.innerHTML = "";
+  // Get reference to search results container
+  var searchResultsContainer = document.getElementById("searchResultsContainer");
+  searchResultsContainer.innerHTML = ""; // Clear previous search results
 
   // Filter data based on search query
   var filteredData = window.data.filter(function (item) {
@@ -108,17 +108,14 @@ function search() {
 
   // Render search results
   filteredData.forEach(function (dataset) {
-    var li = document.createElement("li");
-    li.className = "card";
-    var header = document.createElement("div");
-    header.className = "card-header";
-    header.innerHTML = "<h3>Stock code: " + dataset.stockcode + "</h3>";
-    var content = document.createElement("div");
-    content.className = "card-content";
-    content.innerHTML = "<p><strong>Description: " + dataset.description + "</strong></p>" + "<p><strong>Quantity: " + dataset.quantity + "</strong></p>" + "<p><strong>Price: " + dataset.price + "</strong></p>" + "<p><strong>Invoice date: " + dataset.invoiceDate + "</strong></p>" + "<p><strong>Country: " + dataset.country + "</strong></p>";
-    li.appendChild(header);
-    li.appendChild(content);
-    searchResultsDiv.appendChild(li);
+    var card = document.createElement("div");
+    card.className = "card";
+
+    // Construct card content
+    var headerHTML = "<div class='card-header'><h3>Stock code: " + dataset.stockcode + "</h3></div>";
+    var bodyHTML = "<div class='card-body'>" + "<p><strong>Description: </strong>" + dataset.description + "</p>" + "<p><strong>Quantity: </strong>" + dataset.quantity + "</p>" + "<p><strong>Price: </strong>" + dataset.price + "</p>" + "<p><strong>Invoice date: </strong>" + dataset.invoiceDate + "</p>" + "<p><strong>Country: </strong>" + dataset.country + "</p>" + "</div>";
+    card.innerHTML = headerHTML + bodyHTML;
+    searchResultsContainer.appendChild(card);
   });
 }</script>
   </body>
