@@ -18,18 +18,13 @@
         <button class="btn" id="toggleButton">Search</button>
     </div>
     <nav class="navbar" id="searchContent" style="display: none">
-        <!-- Add the "hidden" class here -->
         <input type="text" placeholder="Search..." id="searchInput">
-        <!-- Add the "hidden" class to input -->
         <button class="navbar-btn hidden" onclick="search()">Search</button>
-        <!-- Add the "hidden" class to button -->
         <button class="navbar-btn hidden" onclick="handleSearchButtonClick()">Measure</button>
-        <!-- Add the "hidden" class to button -->
     </nav>
-    <!-- Add the loading spinner here -->
     <div id="spinner" class="spinner" style="display: none"></div>
     <ul class="samples" id="searchResultsContainer"></ul>
-    <div id="loader" class="loader" style="display: none"></div> <!-- Add loader element -->
+    <div id="loader" class="loader" style="display: none"></div>
     <footer class="footer">
         <p>
             <a href="https://creativecommons.org/licenses/by/4.0/" style="color: #f0db4f;">
@@ -45,7 +40,6 @@
     </footer>
 </div>
 
-<!-- Ensure main.js is loaded before any usage -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
 <script>
         var searchData = []; // Variable to store search data
@@ -67,7 +61,6 @@
 
     function setTotalLoadTime(totalLoadTime) {
         console.log("Total Load Time:", totalLoadTime);
-        // You can add further handling here, such as displaying the total load time on the UI
     }
 
     document.addEventListener("DOMContentLoaded", function () {
