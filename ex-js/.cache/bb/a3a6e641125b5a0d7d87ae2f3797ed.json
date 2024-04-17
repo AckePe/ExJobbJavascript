@@ -1,1 +1,280 @@
-{"id":"main.js","dependencies":[{"name":"C:\\Users\\AxelE\\Documents\\GitHub\\ExJobbJavascript\\ex-js\\package.json","includedInParent":true,"mtime":1709720201231}],"generated":{"js":"document.addEventListener(\"DOMContentLoaded\", function () {\n  var button = document.getElementById(\"toggleButton\");\n  button.addEventListener(\"click\", function () {\n    if (button.textContent === \"Search\") {\n      button.textContent = \"Home\";\n    } else {\n      button.textContent = \"Search\";\n    }\n  });\n});"},"sourceMaps":{"js":{"mappings":[{"generated":{"line":1,"column":0},"source":"main.js","original":{"line":1,"column":0},"name":"document"},{"generated":{"line":1,"column":8},"source":"main.js","original":{"line":1,"column":8}},{"generated":{"line":1,"column":9},"source":"main.js","original":{"line":1,"column":9},"name":"addEventListener"},{"generated":{"line":1,"column":25},"source":"main.js","original":{"line":1,"column":25}},{"generated":{"line":1,"column":26},"source":"main.js","original":{"line":1,"column":26}},{"generated":{"line":1,"column":44},"source":"main.js","original":{"line":1,"column":44}},{"generated":{"line":1,"column":46},"source":"main.js","original":{"line":1,"column":46}},{"generated":{"line":1,"column":58},"source":"main.js","original":{"line":1,"column":58}},{"generated":{"line":2,"column":2},"source":"main.js","original":{"line":2,"column":2}},{"generated":{"line":2,"column":6},"source":"main.js","original":{"line":2,"column":6},"name":"button"},{"generated":{"line":2,"column":12},"source":"main.js","original":{"line":2,"column":12}},{"generated":{"line":2,"column":15},"source":"main.js","original":{"line":2,"column":15},"name":"document"},{"generated":{"line":2,"column":23},"source":"main.js","original":{"line":2,"column":23}},{"generated":{"line":2,"column":24},"source":"main.js","original":{"line":2,"column":24},"name":"getElementById"},{"generated":{"line":2,"column":38},"source":"main.js","original":{"line":2,"column":38}},{"generated":{"line":2,"column":39},"source":"main.js","original":{"line":2,"column":39}},{"generated":{"line":2,"column":53},"source":"main.js","original":{"line":2,"column":53}},{"generated":{"line":2,"column":54},"source":"main.js","original":{"line":2,"column":54}},{"generated":{"line":3,"column":2},"source":"main.js","original":{"line":4,"column":2},"name":"button"},{"generated":{"line":3,"column":8},"source":"main.js","original":{"line":4,"column":8}},{"generated":{"line":3,"column":9},"source":"main.js","original":{"line":4,"column":9},"name":"addEventListener"},{"generated":{"line":3,"column":25},"source":"main.js","original":{"line":4,"column":25}},{"generated":{"line":3,"column":26},"source":"main.js","original":{"line":4,"column":26}},{"generated":{"line":3,"column":33},"source":"main.js","original":{"line":4,"column":33}},{"generated":{"line":3,"column":35},"source":"main.js","original":{"line":4,"column":35}},{"generated":{"line":3,"column":47},"source":"main.js","original":{"line":4,"column":47}},{"generated":{"line":4,"column":4},"source":"main.js","original":{"line":5,"column":4}},{"generated":{"line":4,"column":8},"source":"main.js","original":{"line":5,"column":8},"name":"button"},{"generated":{"line":4,"column":14},"source":"main.js","original":{"line":5,"column":14}},{"generated":{"line":4,"column":15},"source":"main.js","original":{"line":5,"column":15},"name":"textContent"},{"generated":{"line":4,"column":26},"source":"main.js","original":{"line":5,"column":26}},{"generated":{"line":4,"column":31},"source":"main.js","original":{"line":5,"column":31}},{"generated":{"line":4,"column":39},"source":"main.js","original":{"line":5,"column":39}},{"generated":{"line":4,"column":41},"source":"main.js","original":{"line":5,"column":41}},{"generated":{"line":5,"column":6},"source":"main.js","original":{"line":6,"column":6},"name":"button"},{"generated":{"line":5,"column":12},"source":"main.js","original":{"line":6,"column":12}},{"generated":{"line":5,"column":13},"source":"main.js","original":{"line":6,"column":13},"name":"textContent"},{"generated":{"line":5,"column":24},"source":"main.js","original":{"line":6,"column":24}},{"generated":{"line":5,"column":27},"source":"main.js","original":{"line":6,"column":27}},{"generated":{"line":5,"column":33},"source":"main.js","original":{"line":6,"column":33}},{"generated":{"line":6,"column":4},"source":"main.js","original":{"line":7,"column":4}},{"generated":{"line":6,"column":5},"source":"main.js","original":{"line":7,"column":5}},{"generated":{"line":6,"column":11},"source":"main.js","original":{"line":7,"column":11}},{"generated":{"line":7,"column":6},"source":"main.js","original":{"line":8,"column":6},"name":"button"},{"generated":{"line":7,"column":12},"source":"main.js","original":{"line":8,"column":12}},{"generated":{"line":7,"column":13},"source":"main.js","original":{"line":8,"column":13},"name":"textContent"},{"generated":{"line":7,"column":24},"source":"main.js","original":{"line":8,"column":24}},{"generated":{"line":7,"column":27},"source":"main.js","original":{"line":8,"column":27}},{"generated":{"line":7,"column":35},"source":"main.js","original":{"line":8,"column":35}},{"generated":{"line":8,"column":4},"source":"main.js","original":{"line":9,"column":4}},{"generated":{"line":9,"column":2},"source":"main.js","original":{"line":10,"column":2}},{"generated":{"line":9,"column":3},"source":"main.js","original":{"line":10,"column":3}},{"generated":{"line":9,"column":4},"source":"main.js","original":{"line":10,"column":4}},{"generated":{"line":10,"column":0},"source":"main.js","original":{"line":11,"column":0}},{"generated":{"line":10,"column":1},"source":"main.js","original":{"line":11,"column":1}},{"generated":{"line":10,"column":2},"source":"main.js","original":{"line":11,"column":2}}],"sources":{"main.js":"document.addEventListener(\"DOMContentLoaded\", function () {\n  var button = document.getElementById(\"toggleButton\");\n\n  button.addEventListener(\"click\", function () {\n    if (button.textContent === \"Search\") {\n      button.textContent = \"Home\";\n    } else {\n      button.textContent = \"Search\";\n    }\n  });\n});\n"},"lineCount":null}},"error":null,"hash":"a7cab68d2d1e58d6290698ac15ea737a","cacheData":{"env":{}}}
+{
+  "id": "main.js",
+  "dependencies": [
+    {
+      "name": "C:\\Users\\AxelE\\Documents\\GitHub\\ExJobbJavascript\\ex-js\\package.json",
+      "includedInParent": true,
+      "mtime": 1713023396644
+    }
+  ],
+  "generated": {
+    "js": "function toggleContent() {\n  var searchContent = document.getElementById(\"searchContent\");\n  var elementsToToggle = searchContent.querySelectorAll(\".hidden\"); // Select all elements with the class \"hidden\" inside the nav\n  elementsToToggle.forEach(function (element) {\n    element.classList.toggle(\"hidden\");\n  });\n}"
+  },
+  "sourceMaps": {
+    "js": {
+      "mappings": [
+        {
+          "generated": { "line": 1, "column": 0 },
+          "source": "main.js",
+          "original": { "line": 1, "column": 0 }
+        },
+        {
+          "generated": { "line": 1, "column": 9 },
+          "source": "main.js",
+          "original": { "line": 1, "column": 9 },
+          "name": "toggleContent"
+        },
+        {
+          "generated": { "line": 1, "column": 22 },
+          "source": "main.js",
+          "original": { "line": 1, "column": 22 },
+          "name": "toggleContent"
+        },
+        {
+          "generated": { "line": 1, "column": 23 },
+          "source": "main.js",
+          "original": { "line": 1, "column": 22 }
+        },
+        {
+          "generated": { "line": 1, "column": 25 },
+          "source": "main.js",
+          "original": { "line": 1, "column": 25 }
+        },
+        {
+          "generated": { "line": 2, "column": 2 },
+          "source": "main.js",
+          "original": { "line": 2, "column": 2 }
+        },
+        {
+          "generated": { "line": 2, "column": 6 },
+          "source": "main.js",
+          "original": { "line": 2, "column": 8 },
+          "name": "searchContent"
+        },
+        {
+          "generated": { "line": 2, "column": 19 },
+          "source": "main.js",
+          "original": { "line": 2, "column": 21 }
+        },
+        {
+          "generated": { "line": 2, "column": 22 },
+          "source": "main.js",
+          "original": { "line": 2, "column": 24 },
+          "name": "document"
+        },
+        {
+          "generated": { "line": 2, "column": 30 },
+          "source": "main.js",
+          "original": { "line": 2, "column": 32 }
+        },
+        {
+          "generated": { "line": 2, "column": 31 },
+          "source": "main.js",
+          "original": { "line": 2, "column": 33 },
+          "name": "getElementById"
+        },
+        {
+          "generated": { "line": 2, "column": 45 },
+          "source": "main.js",
+          "original": { "line": 2, "column": 47 }
+        },
+        {
+          "generated": { "line": 2, "column": 46 },
+          "source": "main.js",
+          "original": { "line": 2, "column": 48 }
+        },
+        {
+          "generated": { "line": 2, "column": 61 },
+          "source": "main.js",
+          "original": { "line": 2, "column": 63 }
+        },
+        {
+          "generated": { "line": 2, "column": 62 },
+          "source": "main.js",
+          "original": { "line": 2, "column": 64 }
+        },
+        {
+          "generated": { "line": 3, "column": 2 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 2 }
+        },
+        {
+          "generated": { "line": 3, "column": 6 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 8 },
+          "name": "elementsToToggle"
+        },
+        {
+          "generated": { "line": 3, "column": 22 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 24 }
+        },
+        {
+          "generated": { "line": 3, "column": 25 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 27 },
+          "name": "searchContent"
+        },
+        {
+          "generated": { "line": 3, "column": 38 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 40 }
+        },
+        {
+          "generated": { "line": 3, "column": 39 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 41 },
+          "name": "querySelectorAll"
+        },
+        {
+          "generated": { "line": 3, "column": 55 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 57 }
+        },
+        {
+          "generated": { "line": 3, "column": 56 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 58 }
+        },
+        {
+          "generated": { "line": 3, "column": 65 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 67 }
+        },
+        {
+          "generated": { "line": 3, "column": 66 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 68 }
+        },
+        {
+          "generated": { "line": 3, "column": 67 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 69 }
+        },
+        {
+          "generated": { "line": 3, "column": 68 },
+          "source": "main.js",
+          "original": { "line": 3, "column": 70 }
+        },
+        {
+          "generated": { "line": 4, "column": 2 },
+          "source": "main.js",
+          "original": { "line": 4, "column": 2 },
+          "name": "elementsToToggle"
+        },
+        {
+          "generated": { "line": 4, "column": 18 },
+          "source": "main.js",
+          "original": { "line": 4, "column": 18 }
+        },
+        {
+          "generated": { "line": 4, "column": 19 },
+          "source": "main.js",
+          "original": { "line": 4, "column": 19 },
+          "name": "forEach"
+        },
+        {
+          "generated": { "line": 4, "column": 26 },
+          "source": "main.js",
+          "original": { "line": 4, "column": 26 }
+        },
+        {
+          "generated": { "line": 4, "column": 27 },
+          "source": "main.js",
+          "original": { "line": 4, "column": 27 }
+        },
+        {
+          "generated": { "line": 4, "column": 37 },
+          "source": "main.js",
+          "original": { "line": 4, "column": 28 },
+          "name": "element"
+        },
+        {
+          "generated": { "line": 4, "column": 44 },
+          "source": "main.js",
+          "original": { "line": 4, "column": 35 }
+        },
+        {
+          "generated": { "line": 4, "column": 46 },
+          "source": "main.js",
+          "original": { "line": 4, "column": 40 }
+        },
+        {
+          "generated": { "line": 5, "column": 4 },
+          "source": "main.js",
+          "original": { "line": 5, "column": 4 },
+          "name": "element"
+        },
+        {
+          "generated": { "line": 5, "column": 11 },
+          "source": "main.js",
+          "original": { "line": 5, "column": 11 }
+        },
+        {
+          "generated": { "line": 5, "column": 12 },
+          "source": "main.js",
+          "original": { "line": 5, "column": 12 },
+          "name": "classList"
+        },
+        {
+          "generated": { "line": 5, "column": 21 },
+          "source": "main.js",
+          "original": { "line": 5, "column": 21 }
+        },
+        {
+          "generated": { "line": 5, "column": 22 },
+          "source": "main.js",
+          "original": { "line": 5, "column": 22 },
+          "name": "toggle"
+        },
+        {
+          "generated": { "line": 5, "column": 28 },
+          "source": "main.js",
+          "original": { "line": 5, "column": 28 }
+        },
+        {
+          "generated": { "line": 5, "column": 29 },
+          "source": "main.js",
+          "original": { "line": 5, "column": 29 }
+        },
+        {
+          "generated": { "line": 5, "column": 37 },
+          "source": "main.js",
+          "original": { "line": 5, "column": 37 }
+        },
+        {
+          "generated": { "line": 5, "column": 38 },
+          "source": "main.js",
+          "original": { "line": 5, "column": 38 }
+        },
+        {
+          "generated": { "line": 6, "column": 2 },
+          "source": "main.js",
+          "original": { "line": 6, "column": 2 }
+        },
+        {
+          "generated": { "line": 6, "column": 3 },
+          "source": "main.js",
+          "original": { "line": 6, "column": 3 }
+        },
+        {
+          "generated": { "line": 6, "column": 4 },
+          "source": "main.js",
+          "original": { "line": 6, "column": 4 }
+        },
+        {
+          "generated": { "line": 7, "column": 0 },
+          "source": "main.js",
+          "original": { "line": 7, "column": 0 }
+        }
+      ],
+      "sources": {
+        "main.js": "function toggleContent() {\r\n  const searchContent = document.getElementById(\"searchContent\");\r\n  const elementsToToggle = searchContent.querySelectorAll(\".hidden\"); // Select all elements with the class \"hidden\" inside the nav\r\n  elementsToToggle.forEach((element) => {\r\n    element.classList.toggle(\"hidden\");\r\n  });\r\n}\r\n"
+      },
+      "lineCount": null
+    }
+  },
+  "error": null,
+  "hash": "00d35b76dc6c56d0ca4d626cbc0f1cde",
+  "cacheData": { "env": {} }
+}

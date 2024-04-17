@@ -1,28 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript App</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <script src="main.js"></script>
-
-    <div id="root" class="container">
-      <header class="header">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="root" class="container">
+    <header class="header">
         <h1>JavaScript</h1>
-      </header>
-      <div>
-        <img src="js-logo.png" alt="Logo" />
-      </div>
-      <div>
-        <button class="btn" onclick="toggleContent()">Search</button>
-      </div>
-      <div id="searchContent"></div>
-      <footer class="footer">
-        <p>This is a sample text</p>
-      </footer>
+    </header>
+    <div>
+        <img src="js-logo.png" alt="Logo">
     </div>
-  </body>
+    <div>
+        <button class="btn" id="toggleButton">Search</button>
+    </div>
+    <nav class="navbar" id="searchContent" style="display: none">
+        <!-- Add the "hidden" class here -->
+        <input type="text" placeholder="Search..." id="searchInput">
+        <!-- Add the "hidden" class to input -->
+        <button class="navbar-btn hidden" onclick="search()">Search</button>
+        <!-- Add the "hidden" class to button -->
+        <button class="navbar-btn hidden" onclick="handleSearchButtonClick()">Measure</button>
+        <!-- Add the "hidden" class to button -->
+    </nav>
+    <!-- Add the loading spinner here -->
+    <div id="spinner" class="spinner" style="display: none"></div>
+    <ul class="samples" id="searchResultsContainer"></ul>
+    <div id="loader" class="loader" style="display: none"></div> <!-- Add loader element -->
+    <footer class="footer">
+        <p>
+            <a href="https://creativecommons.org/licenses/by/4.0/" style="color: #f0db4f;">
+                Attribution 4.0 International (CC BY 4.0)
+            </a>
+        <p>
+            Dataset created by
+            <a href="https://www.kaggle.com/datasets/whenamancodes/online-retail-data-ii" style="color: #f0db4f;">
+                Aman Chauhan
+            </a>
+        </p>
+        </p>
+    </footer>
+</div>
+
+<!-- Ensure main.js is loaded before any usage -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+<script>
+        var searchData = []; // Variable to store search data
+    var isMeasureClicked = false; // Flag to track if "Measure" button is clicked
+
+    function setSearchData(data) {
+        searchData = data;
+    }
+
+    function setIsMeasureClicked(clicked) {
+        isMeasureClicked = clicked;
+    }
+
+    function handleSearchButtonClick() {
+      console.log("Measure button is clicked");
+        setSearchData([]); // Clear previous search data
+        runSearches();
+    }
+
+    function setTotalLoadTime(totalLoadTime) {
+        console.log("Total Load Time:", totalLoadTime);
+        // You can add further handling here, such as displaying the total load time on the UI
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var toggleButton = document.getElementById("toggleButton");
+        toggleButton.addEventListener("click", toggleContent);
+
+        // Add event listener to the search button
+        var searchButton = document.querySelector("#searchContent button");
+        searchButton.addEventListener("click", function () {
+            // Display search content if hidden
+            var searchContent = document.getElementById("searchContent");
+            if (searchContent.style.display === "none") {
+                searchContent.style.display = "flex";
+                toggleButton.textContent = "Home"; // Change button text
+            }
+
+            // Run the search function
+            search();
+        });
+
+        // Add event listener to the measure button
+        var measureButton = document.querySelector("#searchContent button:nth-child(2)");
+        measureButton.addEventListener("click", handleSearchButtonClick);
+
+        fetch('http://localhost:3000/dataSet.json')
+            .then(response => {
+                console.log('Fetch response:', response);
+                return response.json(); // Parse response body as JSON
+            })
+            .then(data => {
+                console.log('Parsed JSON data:', data); // Log parsed JSON data
+
+                // Slice the data to include only the first 100 items
+                window.data = data;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+
+    function toggleContent() {
+        var searchContent = document.getElementById("searchContent");
+        var toggleButton = document.getElementById("toggleButton");
+        if (searchContent.style.display === "none") {
+            searchContent.style.display = "flex";
+            toggleButton.textContent = "Home"; // Change button text
+        } else {
+            searchContent.style.display = "none"; // Corrected assignment
+            toggleButton.textContent = "Search"; // Change button text
+        }
+    }
+
+    function setSearchResult(result) {
+        var searchResultsContainer = document.getElementById("searchResultsContainer");
+        searchResultsContainer.innerHTML = result;
+    }
+
+    function setLoading(loading) {
+        var loader = document.getElementById("loader");
+        if (loader) {
+            if (loading) {
+                loader.style.display = "block";
+            } else {
+                loader.style.display = "none";
+            }
+        } else {
+            console.error("Loader element not found");
+        }
+    }
+
+    function handleSearch(term) {
+    setLoading(true);
+    var startTime = performance.now(); // Record start time
+
+    // Perform data filtering without artificial delay
+    var filteredData = window.data.filter(function (item) {
+        for (var key in item) {
+            if (item.hasOwnProperty(key) && typeof item[key] === "string" && item[key].toLowerCase().includes(term.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    });
+
+    var endTime = performance.now(); // Record end time
+    var measuredLoadTime = endTime - startTime;
+
+    setSearchResult(filteredData.slice(0, 100));
+    setLoading(false); // Set loading to false when search completes
+    return Promise.resolve(filteredData); // Resolve with filtered data
+}
+
+    async function runSearches() {
+    setIsMeasureClicked(true); // Set measure clicked flag
+
+    let totalLoadTime = 0;
+    const searchData = [];
+
+    for (let i = 0; i < 1000; i++) {
+        const searchTerm = generateRandomSearchTerm();
+        const startTime = performance.now(); // Record start time
+        await handleSearch(searchTerm); // Wait for each search to complete
+        const endTime = performance.now(); // Record end time
+        const measuredLoadTime = endTime - startTime;
+        totalLoadTime += measuredLoadTime;
+
+        searchData.push({ searchTerm, loadTime: measuredLoadTime });
+    }
+
+    setTotalLoadTime(totalLoadTime);
+    setSearchData(searchData);
+    handleSearchDataUpdate(searchData);
+}
+
+function generateRandomSearchTerm() {
+    // Use the current timestamp as the seed value
+    const seedValue = new Date().getTime();
+
+    // Initialize the random number generator with the seed value
+    const rng = new Math.seedrandom(seedValue);
+
+    const alphabet = "abcdefghijklmnopqrstuvwxyz";
+    let searchTerm = "";
+
+    for (let i = 0; i < 5; i++) {
+        const randomLetterIndex = Math.floor(rng() * alphabet.length); // Use the seeded RNG
+        const randomLetter = alphabet[randomLetterIndex];
+        searchTerm += randomLetter;
+    }
+
+    return searchTerm;
+}
+
+
+    function handleSearchDataUpdate(searchData) {
+        if (isMeasureClicked && searchData.length > 0) {
+            const blob = new Blob([JSON.stringify(searchData, null, 2)], {
+                type: "application/json",
+            });
+
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "search_results_js.json";
+            document.body.appendChild(link);
+            link.click();
+            URL.revokeObjectURL(url);
+            document.body.removeChild(link);
+        }
+    }
+
+    function search() {
+        // Get search query from input field
+        var query = document.getElementById("searchInput").value.toLowerCase().trim();
+
+        // Get reference to search results container
+        var searchResultsContainer = document.getElementById("searchResultsContainer");
+        searchResultsContainer.innerHTML = ""; // Clear previous search results
+
+        setLoading(true); // Set loading to true when search starts
+
+        // Filter data based on search query
+        var filteredData = window.data.filter(function (item) {
+            // Check if any field matches the search query
+            for (var key in item) {
+                if (item.hasOwnProperty(key) && typeof item[key] === "string" && item[key].toLowerCase().includes(query)) {
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        // Render search results
+        filteredData.forEach(function (dataset) {
+            var card = document.createElement("div");
+            card.className = "card";
+
+            // Construct card content
+            var headerHTML = "<div class='card-header'><h3>Stock code: " + dataset.stockcode + "</h3></div>";
+            var bodyHTML = "<div class='card-body'>" +
+                "<p><strong>Description: </strong>" + dataset.description + "</p>" +
+                "<p><strong>Quantity: </strong>" + dataset.quantity + "</p>" +
+                "<p><strong>Price: </strong>" + dataset.price + "</p>" +
+                "<p><strong>Invoice date: </strong>" + dataset.invoiceDate + "</p>" +
+                "<p><strong>Country: </strong>" + dataset.country + "</p>" +
+                "</div>";
+
+            card.innerHTML = headerHTML + bodyHTML;
+            searchResultsContainer.appendChild(card);
+        });
+
+        setLoading(false); // Set loading to false when search completes
+    }
+
+</script>
+</body>
 </html>

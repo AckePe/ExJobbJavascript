@@ -1,11 +1,7 @@
-document.addEventListener("click", buttonListener() {
-  var button = document.getElementById("toggleButton");
-
-  button.addEventListener("click", function () {
-    if (button.textContent === "Search") {
-      button.textContent = "Home";
-    } else {
-      button.textContent = "Search";
-    }
+function toggleContent() {
+  const searchContent = document.getElementById("searchContent");
+  const elementsToToggle = searchContent.querySelectorAll(".hidden"); // Select all elements with the class "hidden" inside the nav
+  elementsToToggle.forEach((element) => {
+    element.classList.toggle("hidden");
   });
-});
+}

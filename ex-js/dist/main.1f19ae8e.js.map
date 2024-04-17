@@ -1,1 +1,24 @@
-{"version":3,"sources":["main.js"],"names":["document","addEventListener","button","getElementById","textContent"],"mappings":"AAAAA,QAAQ,CAACC,gBAAgB,CAAC,kBAAkB,EAAE,YAAY;EACxD,IAAIC,MAAM,GAAGF,QAAQ,CAACG,cAAc,CAAC,cAAc,CAAC;EAEpDD,MAAM,CAACD,gBAAgB,CAAC,OAAO,EAAE,YAAY;IAC3C,IAAIC,MAAM,CAACE,WAAW,KAAK,QAAQ,EAAE;MACnCF,MAAM,CAACE,WAAW,GAAG,MAAM;IAC7B,CAAC,MAAM;MACLF,MAAM,CAACE,WAAW,GAAG,QAAQ;IAC/B;EACF,CAAC,CAAC;AACJ,CAAC,CAAC","file":"main.1f19ae8e.js","sourceRoot":"..\\src","sourcesContent":["document.addEventListener(\"DOMContentLoaded\", function () {\n  var button = document.getElementById(\"toggleButton\");\n\n  button.addEventListener(\"click\", function () {\n    if (button.textContent === \"Search\") {\n      button.textContent = \"Home\";\n    } else {\n      button.textContent = \"Search\";\n    }\n  });\n});\n"]}
+{
+  "version": 3,
+  "sources": [
+    "main.js"
+  ],
+  "names": [
+    "toggleContent",
+    "searchContent",
+    "document",
+    "getElementById",
+    "elementsToToggle",
+    "querySelectorAll",
+    "forEach",
+    "element",
+    "classList",
+    "toggle"
+  ],
+  "mappings": "AAAA,SAASA,aAAaA,CAAA,EAAG;EACvB,IAAMC,aAAa,GAAGC,QAAQ,CAACC,cAAc,CAAC,eAAe,CAAC;EAC9D,IAAMC,gBAAgB,GAAGH,aAAa,CAACI,gBAAgB,CAAC,SAAS,CAAC,CAAC,CAAC;EACpED,gBAAgB,CAACE,OAAO,CAAC,UAACC,OAAO,EAAK;IACpCA,OAAO,CAACC,SAAS,CAACC,MAAM,CAAC,QAAQ,CAAC;EACpC,CAAC,CAAC;AACJ",
+  "file": "main.1f19ae8e.js",
+  "sourceRoot": "..\\src",
+  "sourcesContent": [
+    "function toggleContent() {\r\n  const searchContent = document.getElementById(\"searchContent\");\r\n  const elementsToToggle = searchContent.querySelectorAll(\".hidden\"); // Select all elements with the class \"hidden\" inside the nav\r\n  elementsToToggle.forEach((element) => {\r\n    element.classList.toggle(\"hidden\");\r\n  });\r\n}\r\n"
+  ]
+}
