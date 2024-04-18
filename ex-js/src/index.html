@@ -132,26 +132,25 @@
     }
 
     function handleSearch(term) {
-    setLoading(true);
-    var startTime = performance.now(); // Record start time
+        setLoading(true);
+        var startTime = performance.now(); // Record start time
 
-    // Perform data filtering without artificial delay
-    var filteredData = window.data.filter(function (item) {
-        for (var key in item) {
-            if (item.hasOwnProperty(key) && typeof item[key] === "string" && item[key].toLowerCase().includes(term.toLowerCase())) {
-                return true;
+        var filteredData = window.data.filter(function (item) {
+            for (var key in item) {
+                if (item.hasOwnProperty(key) && typeof item[key] === "string" && item[key].toLowerCase().includes(term.toLowerCase())) {
+                    return true;
+                }
             }
-        }
-        return false;
-    });
+            return false;
+        });
 
-    var endTime = performance.now(); // Record end time
-    var measuredLoadTime = endTime - startTime;
+        var endTime = performance.now(); // Record end time
+        var measuredLoadTime = endTime - startTime;
 
-    setSearchResult(filteredData.slice(0, 100));
-    setLoading(false); // Set loading to false when search completes
-    return Promise.resolve(filteredData); // Resolve with filtered data
-}
+        setSearchResult(filteredData.slice(0, 100));
+        setLoading(false);
+        return Promise.resolve(filteredData); // Resolve with filtered data
+    }
 
     async function runSearches() {
     setIsMeasureClicked(true); // Set measure clicked flag
