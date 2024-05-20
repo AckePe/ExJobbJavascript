@@ -8,5 +8,8 @@
   "parserOptions": {
     "ecmaVersion": 10,
     "sourceType": "script"
+  },
+  "rules": {
+    "quotes": ["error", "single"]
   }
 }

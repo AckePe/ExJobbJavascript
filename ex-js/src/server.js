@@ -32,7 +32,7 @@ app.get('/dataSet.json', (req, res) => {
   });
 });
 
-// Route handler for the root URL ("/")
+// Route handler for the root URL ('/')
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });

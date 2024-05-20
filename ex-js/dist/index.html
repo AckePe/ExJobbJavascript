@@ -19,8 +19,13 @@
     </div>
     <nav class="navbar" id="searchContent" style="display: none">
         <input type="text" placeholder="Search..." id="searchInput">
+<<<<<<< Updated upstream
         <button class="navbar-btn hidden" id="navbar-search" onclick="search()">Search</button>
         <button class="navbar-btn hidden" onclick="handleSearchButtonClick()">Measure</button>
+=======
+        <button class="navbar-btn hidden" id="searchButton">Search</button>
+        <button class="navbar-btn hidden" id="measureButton">Measure</button>
+>>>>>>> Stashed changes
     </nav>
     <div id="spinner" class="spinner" style="display: none"></div>
     <ul class="samples" id="searchResultsContainer"></ul>
@@ -67,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
   toggleButton.addEventListener("click", toggleContent);
 
   // Add event listener to the search button
-  var searchButton = document.querySelector("#searchContent button");
+  var searchButton = document.getElementById("searchButton");
   searchButton.addEventListener("click", function () {
     // Display search content if hidden
     var searchContent = document.getElementById("searchContent");
@@ -81,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Add event listener to the measure button
-  var measureButton = document.querySelector("#searchContent button:nth-child(2)");
+  var measureButton = document.getElementById("measureButton");
   measureButton.addEventListener("click", handleSearchButtonClick);
   fetch('http://localhost:3000/dataSet.json').then(function (response) {
     console.log('Fetch response:', response);
@@ -90,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log('Parsed JSON data:', data); // Log parsed JSON data
 
     // Slice the data to include only the first 100 items
-    window.data = data;
+    window.data = data.slice(0, 100);
   }).catch(function (error) {
     console.error('Error fetching data:', error);
   });

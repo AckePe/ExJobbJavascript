@@ -19,8 +19,8 @@
     </div>
     <nav class="navbar" id="searchContent" style="display: none">
         <input type="text" placeholder="Search..." id="searchInput">
-        <button class="navbar-btn hidden" id="navbar-search" onclick="search()">Search</button>
-        <button class="navbar-btn hidden" onclick="handleSearchButtonClick()">Measure</button>
+        <button class="navbar-btn hidden" id="searchButton">Search</button>
+        <button class="navbar-btn hidden" id="measureButton">Measure</button>
     </nav>
     <div id="spinner" class="spinner" style="display: none"></div>
     <ul class="samples" id="searchResultsContainer"></ul>
@@ -42,117 +42,117 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
 <script>
-        var searchData = []; // Variable to store search data
-    var isMeasureClicked = false; // Flag to track if "Measure" button is clicked
+var searchData = []; // Variable to store search data
+var isMeasureClicked = false; // Flag to track if "Measure" button is clicked
 
-    function setSearchData(data) {
-        searchData = data;
-    }
+function setSearchData(data) {
+    searchData = data;
+}
 
-    function setIsMeasureClicked(clicked) {
-        isMeasureClicked = clicked;
-    }
+function setIsMeasureClicked(clicked) {
+    isMeasureClicked = clicked;
+}
 
-    function handleSearchButtonClick() {
-      console.log("Measure button is clicked");
-        setSearchData([]); // Clear previous search data
-        runSearches();
-    }
+function handleSearchButtonClick() {
+  console.log("Measure button is clicked");
+    setSearchData([]); // Clear previous search data
+    runSearches();
+}
 
-    function setTotalLoadTime(totalLoadTime) {
-        console.log("Total Load Time:", totalLoadTime);
-    }
+function setTotalLoadTime(totalLoadTime) {
+    console.log("Total Load Time:", totalLoadTime);
+}
 
-    document.addEventListener("DOMContentLoaded", function () {
-        var toggleButton = document.getElementById("toggleButton");
-        toggleButton.addEventListener("click", toggleContent);
+document.addEventListener("DOMContentLoaded", function () {
+    var toggleButton = document.getElementById("toggleButton");
+    toggleButton.addEventListener("click", toggleContent);
 
-        // Add event listener to the search button
-        var searchButton = document.querySelector("#searchContent button");
-        searchButton.addEventListener("click", function () {
-            // Display search content if hidden
-            var searchContent = document.getElementById("searchContent");
-            if (searchContent.style.display === "none") {
-                searchContent.style.display = "flex";
-                toggleButton.textContent = "Home"; // Change button text
-            }
-
-            // Run the search function
-            search();
-        });
-
-        // Add event listener to the measure button
-        var measureButton = document.querySelector("#searchContent button:nth-child(2)");
-        measureButton.addEventListener("click", handleSearchButtonClick);
-
-        fetch('http://localhost:3000/dataSet.json')
-            .then(response => {
-                console.log('Fetch response:', response);
-                return response.json(); // Parse response body as JSON
-            })
-            .then(data => {
-                console.log('Parsed JSON data:', data); // Log parsed JSON data
-
-                // Slice the data to include only the first 100 items
-                window.data = data;
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    });
-
-    function toggleContent() {
+    // Add event listener to the search button
+    var searchButton = document.getElementById("searchButton");
+    searchButton.addEventListener("click", function () {
+        // Display search content if hidden
         var searchContent = document.getElementById("searchContent");
-        var toggleButton = document.getElementById("toggleButton");
         if (searchContent.style.display === "none") {
             searchContent.style.display = "flex";
             toggleButton.textContent = "Home"; // Change button text
-        } else {
-            searchContent.style.display = "none"; // Corrected assignment
-            toggleButton.textContent = "Search"; // Change button text
         }
-    }
 
-    function setSearchResult(result) {
-        var searchResultsContainer = document.getElementById("searchResultsContainer");
-        searchResultsContainer.innerHTML = result;
-    }
+        // Run the search function
+        search();
+    });
 
-    function setLoading(loading) {
-        var loader = document.getElementById("loader");
-        if (loader) {
-            if (loading) {
-                loader.style.display = "block";
-            } else {
-                loader.style.display = "none";
-            }
-        } else {
-            console.error("Loader element not found");
-        }
-    }
+    // Add event listener to the measure button
+    var measureButton = document.getElementById("measureButton");
+    measureButton.addEventListener("click", handleSearchButtonClick);
 
-    function handleSearch(term) {
-        setLoading(true);
-        var startTime = performance.now(); // Record start time
+    fetch('http://localhost:3000/dataSet.json')
+        .then(response => {
+            console.log('Fetch response:', response);
+            return response.json(); // Parse response body as JSON
+        })
+        .then(data => {
+            console.log('Parsed JSON data:', data); // Log parsed JSON data
 
-        var filteredData = window.data.filter(function (item) {
-            for (var key in item) {
-                if (item.hasOwnProperty(key) && typeof item[key] === "string" && item[key].toLowerCase().includes(term.toLowerCase())) {
-                    return true;
-                }
-            }
-            return false;
+            // Slice the data to include only the first 100 items
+            window.data = data.slice(0, 100);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
         });
+});
 
-        var endTime = performance.now(); // Record end time
-        var measuredLoadTime = endTime - startTime;
-
-        setSearchResult(filteredData.slice(0, 100));
-        setLoading(false);
-        return Promise.resolve(filteredData); // Resolve with filtered data
+function toggleContent() {
+    var searchContent = document.getElementById("searchContent");
+    var toggleButton = document.getElementById("toggleButton");
+    if (searchContent.style.display === "none") {
+        searchContent.style.display = "flex";
+        toggleButton.textContent = "Home"; // Change button text
+    } else {
+        searchContent.style.display = "none"; // Corrected assignment
+        toggleButton.textContent = "Search"; // Change button text
     }
+}
 
-    async function runSearches() {
+function setSearchResult(result) {
+    var searchResultsContainer = document.getElementById("searchResultsContainer");
+    searchResultsContainer.innerHTML = result;
+}
+
+function setLoading(loading) {
+    var loader = document.getElementById("loader");
+    if (loader) {
+        if (loading) {
+            loader.style.display = "block";
+        } else {
+            loader.style.display = "none";
+        }
+    } else {
+        console.error("Loader element not found");
+    }
+}
+
+function handleSearch(term) {
+    setLoading(true);
+    var startTime = performance.now(); // Record start time
+
+    var filteredData = window.data.filter(function (item) {
+        for (var key in item) {
+            if (item.hasOwnProperty(key) && typeof item[key] === "string" && item[key].toLowerCase().includes(term.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    });
+
+    var endTime = performance.now(); // Record end time
+    var measuredLoadTime = endTime - startTime;
+
+    setSearchResult(filteredData.slice(0, 100));
+    setLoading(false);
+    return Promise.resolve(filteredData); // Resolve with filtered data
+}
+
+async function runSearches() {
     setIsMeasureClicked(true); // Set measure clicked flag
 
     let totalLoadTime = 0;
@@ -194,65 +194,65 @@ function generateRandomSearchTerm() {
 }
 
 
-    function handleSearchDataUpdate(searchData) {
-        if (isMeasureClicked && searchData.length > 0) {
-            const blob = new Blob([JSON.stringify(searchData, null, 2)], {
-                type: "application/json",
-            });
+function handleSearchDataUpdate(searchData) {
+    if (isMeasureClicked && searchData.length > 0) {
+        const blob = new Blob([JSON.stringify(searchData, null, 2)], {
+            type: "application/json",
+        });
 
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = "search_results_js.json";
-            document.body.appendChild(link);
-            link.click();
-            URL.revokeObjectURL(url);
-            document.body.removeChild(link);
-        }
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "search_results_js.json";
+        document.body.appendChild(link);
+        link.click();
+        URL.revokeObjectURL(url);
+        document.body.removeChild(link);
     }
+}
 
-    function search() {
-        // Get search query from input field
-        var query = document.getElementById("searchInput").value.toLowerCase().trim();
+function search() {
+    // Get search query from input field
+    var query = document.getElementById("searchInput").value.toLowerCase().trim();
 
-        // Get reference to search results container
-        var searchResultsContainer = document.getElementById("searchResultsContainer");
-        searchResultsContainer.innerHTML = ""; // Clear previous search results
+    // Get reference to search results container
+    var searchResultsContainer = document.getElementById("searchResultsContainer");
+    searchResultsContainer.innerHTML = ""; // Clear previous search results
 
-        setLoading(true); // Set loading to true when search starts
+    setLoading(true); // Set loading to true when search starts
 
-        // Filter data based on search query
-        var filteredData = window.data.filter(function (item) {
-            // Check if any field matches the search query
-            for (var key in item) {
-                if (item.hasOwnProperty(key) && typeof item[key] === "string" && item[key].toLowerCase().includes(query)) {
-                    return true;
-                }
+    // Filter data based on search query
+    var filteredData = window.data.filter(function (item) {
+        // Check if any field matches the search query
+        for (var key in item) {
+            if (item.hasOwnProperty(key) && typeof item[key] === "string" && item[key].toLowerCase().includes(query)) {
+                return true;
             }
-            return false;
-        });
+        }
+        return false;
+    });
 
-        // Render search results
-        filteredData.forEach(function (dataset) {
-            var card = document.createElement("div");
-            card.className = "card";
+    // Render search results
+    filteredData.forEach(function (dataset) {
+        var card = document.createElement("div");
+        card.className = "card";
 
-            // Construct card content
-            var headerHTML = "<div class='card-header'><h3>Stock code: " + dataset.stockcode + "</h3></div>";
-            var bodyHTML = "<div class='card-body'>" +
-                "<p><strong>Description: </strong>" + dataset.description + "</p>" +
-                "<p><strong>Quantity: </strong>" + dataset.quantity + "</p>" +
-                "<p><strong>Price: </strong>" + dataset.price + "</p>" +
-                "<p><strong>Invoice date: </strong>" + dataset.invoiceDate + "</p>" +
-                "<p><strong>Country: </strong>" + dataset.country + "</p>" +
-                "</div>";
+        // Construct card content
+        var headerHTML = "<div class='card-header'><h3>Stock code: " + dataset.stockcode + "</h3></div>";
+        var bodyHTML = "<div class='card-body'>" +
+            "<p><strong>Description: </strong>" + dataset.description + "</p>" +
+            "<p><strong>Quantity: </strong>" + dataset.quantity + "</p>" +
+            "<p><strong>Price: </strong>" + dataset.price + "</p>" +
+            "<p><strong>Invoice date: </strong>" + dataset.invoiceDate + "</p>" +
+            "<p><strong>Country: </strong>" + dataset.country + "</p>" +
+            "</div>";
 
-            card.innerHTML = headerHTML + bodyHTML;
-            searchResultsContainer.appendChild(card);
-        });
+        card.innerHTML = headerHTML + bodyHTML;
+        searchResultsContainer.appendChild(card);
+    });
 
-        setLoading(false);
-    }
+    setLoading(false);
+}
 
 </script>
 </body>
