@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log('Parsed JSON data:', data); // Log parsed JSON data
 
             // Slice the data to include only the first 100 items
-            window.data = data.slice(0, 100);
+            window.data = data.slice(0, 500);
         })
         .catch(error => {
             console.error('Error fetching data:', error);
